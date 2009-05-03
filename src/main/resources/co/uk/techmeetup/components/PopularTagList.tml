@@ -1,0 +1,7 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<h2 >Popular Tags</h2>
+<ul >
+<li class="popular_tag"><a class="tag all" href="#">All</a></li>
+	<li t:type="Loop" t:source="tags" t:value="thisTag" class="popular_tag"> <a class="tag meta_tag" href="#" > ${thisTag} </a> </li>
+</ul>
+</t:container>

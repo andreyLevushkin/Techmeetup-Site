@@ -1,0 +1,28 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+<title></title>
+</head>
+
+<t:layout t:page="literal:home">
+<t:zone id="fullPageZone">
+	<div id="main_column">
+	<h1 id="main_title">HOME</h1>
+	<t:zone id="mainContentZone">
+
+		<t:FrontPageListing listedEntities="prop:entities" />
+
+	 <t:zone id="paginationZone">
+		<t:Pagination />
+	</t:zone></t:zone></div>
+
+
+	<div id="sidebar"><t:block>
+		<t:TagCloudSearch entityTags="prop:cloudTags" />
+
+
+		<t:EventShortList />
+	</t:block></div>
+</t:zone>
+</t:layout>
+
+</html>

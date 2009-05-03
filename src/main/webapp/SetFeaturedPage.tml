@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>
+
+<title>Techmeetup</title>
+<link rel="Stylesheet" type="text/css" href="full.css" media="all" />
+</head>
+
+<body t:type="layout">
+<div id="main_column">
+<h1>Set the featured videos</h1>
+<form t:type="Form" t:id="featuredVideoForm">
+<t:palette t:id="selectedVideo" encoder="videoEncoder"
+	model="videoModel" />
+
+<br />
+
+<input type="submit" value="Set" />
+
+</form>
+
+<h1>Set the featured events</h1>
+<form t:type="Form" t:id="featuredEventForm">
+<t:palette t:id="selectedEvent" encoder="eventEncoder"
+	model="eventModel" />
+
+<br />
+
+<input type="submit" value="Set" />
+</form>
+</div>
+<div id="sidebar"><t:AdminNav /></div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<body xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+
+<div id="header"><img id="logo" alt="Techmeetup logo"
+	src="/images/logo-header.gif" /> <t:if test="loggedIn"
+	negate="literal:true">
+	<div id="header_login"><a id="join" href="joinpage"
+		t:type="PageLink" t:page="JoinPage">Join now</a> | <a href="#"
+		t:type="PageLink" t:page="LoginPage">Sign in</a></div>
+</t:if>
+<ul id="navigation">
+	<li><a class="${navHomeClass}" href="/" t:type="PageLink"
+		t:page="Index">Home</a> <!-- <ul onmouseout="hideLocalNav();" onmouseover="showLocalNav();"
+		class="css_hidden" id="local_home_nav">
+		<li><a href="MeetupHome.html">Edinburgh</a></li>
+		<li><a href="MeetupHome.html">Glasgow</a></li>
+	</ul>--></li>
+	<!-- 
+	<li><a class="${navVideosClass}" href="videopage" t:type="PageLink"
+		page="VideoPage">Video</a></li>
+	<li><a class="${navEventsClass}" href="eventpage" t:type="PageLink"
+		page="EventPage">Events</a></li>-->
+	<li><a class="${navDiscussionClass}" href="discussionpage"
+		t:type="PageLink" page="DiscussionPage">Discussions</a></li>
+	<!-- 	<li><a class="${navPeopleClass}" href="peoplepage" t:type="PageLink"
+		page="PeoplePage"> People</a></li>-->
+</ul>
+
+<t:if test="loggedIn">
+	<div id="logged_in">
+	<p>Hi <span id="logged_in_username">${loggedInUser.name}</span><span><a
+		href="#" t:type="PageLink" t:page="EditUserProfilePage">settings</a> <t:if
+		test="admin"> | <a t:type="PageLink" t:page="AdminPostBlog">admin</a>
+	</t:if> | <a href="#" t:type="ActionLink" t:id="logout">logout</a> <!-- | <a href="#">feedback</a>--></span></p>
+
+	</div>
+</t:if></div>
+
+<t:body />
+
+
+<div id="footer"><img id="footer_logo"
+	src="${asset:context:images/footer_logo.jpg}" alt="Techmeetup logo" />
+<!-- 
+<ul>
+	<li><a href="#">Home</a></li>
+	<li><a href="#">Video</a></li>
+	<li><a href="#">Events</a></li>
+	<li><a href="#">Discussions</a></li>
+	<li><a href="#">People</a></li>
+</ul>
+ --></div>
+<div id="dialog" style="display: none"></div>
+</body>
+</html>

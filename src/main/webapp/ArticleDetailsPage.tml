@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<body t:type="Layout">
+<!-- main content goes here -->
+<div id="main_column">
+<div id="blog_details">
+<h1>${article.title}</h1>
+<p class="blog_info">Posted by <t:UserName user="article.owner" />
+on ${article.niceCreated}.</p>
+<div id="blog_content">${article.body}</div>
+
+
+
+<div id="discussion_answers">
+<h1>Comments</h1>
+
+
+<ul id="answers">
+	<li class="${commentClass}" t:type="Loop" t:source="article.comments"
+		t:value="comment" t:index="commentIndex">
+	<div class="body"><img src="${comment.owner.profileImage.url}"
+		alt="picture of comment.owner.name" />
+	<p><t:OutputRaw value="prop:comment.body"></t:OutputRaw></p>
+
+	</div>
+	<div class="comment_info">
+	<p class="discussion_info">by <t:UserName user="comment.owner" />
+	on ${comment.niceCreated}</p>
+	<!-- <p class="inappropriate_flag">FLAG AS INAPPROPRIATE</p>--></div>
+	</li>
+</ul>
+</div>
+	<div id="comment_form">
+<t:if test="loggedIn">
+
+	<form method="post" action="#" t:type="Form" t:id="newCommentForm">
+	<p><label>Post Comment<br />
+	<textarea rows="5" cols="30" t:type="TextArea" t:value="newComment"
+		t:validate="required"></textarea> <input type="submit" name="submit"
+		value="POST" /> </label></p>
+	</form>
+	
+</t:if>
+ <t:if test="loggedIn" negate="true">
+		<p class="login_to_post">Please <a href="#" t:type="PageLink"
+			t:page="LoginPage" class="login_link">login</a> to post a comment</p>
+	</t:if>
+</div></div>
+</div>
+<!-- Secondary content goes here -->
+<div id="sidebar"><a id="back_to_home" t:type="PageLink"
+	t:page="Index">Back to home</a></div>
+</body>
+</html>

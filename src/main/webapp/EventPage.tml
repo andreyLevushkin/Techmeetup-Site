@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>
+
+<title>Techmeetup</title>
+<link rel="Stylesheet" type="text/css" href="full.css" media="all" />
+</head>
+
+<body t:type="layout" t:page="literal:event">
+<t:zone id="fullPageZone">
+	<!--main content goes here-->
+	<div id="main_column">
+
+	<div id="featured_events">
+	<h1>Featured Events</h1>
+	<div class="featured_event left" t:type="Loop"
+		t:source="featuredEvents" t:value="thisEvent"><a href="#"
+		t:type="PageLink" t:page="EventDetailsPage" t:context="thisEvent.id">
+	<img src="${thisEvent.image.url}" alt="event logo" /></a> <a href="#"
+		t:type="PageLink" t:context="thisEvent.id" t:page="EventDetailsPage"
+		class="event_title"> ${thisEvent.title} </a>
+	<p class="event_date">${thisEvent.niceDate}</p>
+	</div>
+	<!--      <div class="featured_event middle"><a href="">--> <!--	<img src="images/tmu_logo.jpg" alt="event logo"/></a>-->
+	<!--	<a  href="" class="event_title">--> <!--	  Techmeetup Edinburgh-->
+	<!--	</a>--> <!--	<p class="event_date">--> <!--	  12 march 2189--> <!--	</p>-->
+	<!--      </div>--> <!--      <div class="featured_event right"><a href="">-->
+	<!--	<img src="images/tmu_logo.jpg" alt="event logo"/></a>--> <!--	<a  href="" class="event_title">-->
+	<!--	  Techmeetup Edinburgh--> <!--	</a>--> <!--	<p class="event_date">-->
+	<!--	  12 march 2189--> <!--	</p>--> <!--      </div>--></div>
+	<t:zone id="mainContentZone">
+		<t:EventListing events="prop:entities" />
+	</t:zone><t:zone id="paginationZone">
+		<t:Pagination />
+	</t:zone></div>
+
+	<!--Secondary content goes here -->
+	<div id="sidebar"><t:tagCloudSearch entityTags="prop:cloudTags" />
+
+	<t:PopularTagList type="tagClass" />
+	<!-- <div id="month_picker">
+	<h2>Month:</h2>
+	<table>
+		<tr>
+			<td><a href="">January</a></td>
+			<td><a href="">February</a></td>
+		</tr>
+		<tr>
+			<td><a href="">March</a></td>
+			<td><a href="">April</a></td>
+		</tr>
+		<tr>
+			<td><a href="">May</a></td>
+			<td><a href="">June</a></td>
+		</tr>
+		<tr>
+			<td><a href="">July</a></td>
+			<td><a href="">August</a></td>
+		</tr>
+		<tr>
+			<td><a href="">September</a></td>
+			<td class="month_selected"><a href="">October</a></td>
+		</tr>
+		<tr>
+			<td><a href="">November</a></td>
+			<td><a href="">December</a></td>
+		</tr>
+	</table>
+	</div>
+-->
+	</div>
+</t:zone>
+</body>
+
+</html>

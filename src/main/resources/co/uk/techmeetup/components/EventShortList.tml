@@ -1,0 +1,10 @@
+<div id="events"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<h2>Events</h2>
+<ul>
+	<li t:type="Loop" t:source="events" t:value="event" t:index="loopIndex"		class="${eventClass}">
+	<h3><!-- <a href="#" t:type="PageLink" t:page="EventDetailsPage"	t:context="event.id">-->${event.title}<!-- </a>--></h3>
+	<p>${event.location} on ${event.niceDate}</p>
+	</li>
+</ul>
+</div>

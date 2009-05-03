@@ -1,0 +1,19 @@
+<p id="pagination" t:type="zone" t:id="paginationZone"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+	
+	<t:if
+	test="prop:notFirst">
+	<a t:type="ActionLink" t:context="prevPage" t:zone="mainContentZone"
+		t:id="prev">Previous</a>
+</t:if> 
+<t:if test="showPagination">
+<t:Loop t:source="pages" t:value="thisPage">
+	<a t:type="ActionLink" t:context="thisPage" t:zone="mainContentZone"
+		t:id="pageSelect" class="${pageNumberClass}">${thisPageNice}</a>
+</t:Loop> 
+</t:if>
+<t:if test="prop:notLast">
+	<a t:type="ActionLink" t:context="nextPage" t:zone="fullPageZone"
+		t:id="next">Next</a>
+
+</t:if></p>

@@ -1,0 +1,16 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<body t:type="Layout">
+<!-- main content goes here -->
+<div id="main_column">
+	<div id="event_details">
+		<h1>${event.title}</h1>	
+		<h2>${event.niceDate}, ${event.time}, ${event.location}</h2>
+		<p>Details: ${event.description}</p>
+	</div>
+</div>
+<!-- Secondary content goes here -->
+<div id="sidebar">
+
+</div>
+</body>
+</html>

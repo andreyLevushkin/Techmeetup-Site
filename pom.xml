@@ -1,0 +1,211 @@
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>co.uk.techmeetup</groupId>
+	<artifactId>Techmeetup</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>Techmeetup Tapestry 5 Application</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-core</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+
+		<!--
+			A dependency on either JUnit or TestNG is required, or the surefire
+			plugin (which runs the tests) will fail, preventing Maven from
+			packaging the WAR. Tapestry includes a large number of testing
+			facilities designed for use with TestNG (http://testng.org/), so it's
+			recommended.
+		-->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>5.1</version>
+			<classifier>jdk15</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-hibernate</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>3.1.12</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>3.1.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-upload</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-email</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>antisamy</groupId>
+			<artifactId>antisamy-bin</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cyberneko</groupId>
+			<artifactId>com.springsource.org.cyberneko.html</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>Techmeetup</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+
+			<!-- Run the application using "mvn jetty:run" -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.9</version>
+				<configuration>
+					<stopPort>9966</stopPort>
+					<stopKey>foo</stopKey>
+
+					<!-- Log to the console. -->
+					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+						<!--
+							This doesn't do anything for Jetty, but is a workaround for a
+							Maven bug that prevents the requestLog from being set.
+						-->
+						<append>true</append>
+					</requestLog>
+					<contextPath>/</contextPath>
+				</configuration>
+			</plugin>
+			<!--
+				<plugin> <groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId> <configuration>
+				<mode>both</mode> </configuration> </plugin>
+			-->
+		</plugins>
+	</build>
+
+	<reporting>
+
+		<!--
+			Adds a report detailing the components, mixins and base classes
+			defined by this module.
+		-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-component-report</artifactId>
+				<version>${tapestry-release-version}</version>
+				<configuration>
+					<rootPackage>co.uk.techmeetup</rootPackage>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<repositories>
+		<!--
+			This can be commented out when the tapestry-release-version is a not
+			a snapshot. The non-snapshot Tapestry artifacts are distributed
+			through the central repository at ibiblio.
+		-->
+
+		<repository>
+			<id>tapestry-snapshots</id>
+			<url>http://tapestry.formos.com/maven-snapshot-repository/</url>
+			<releases>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>codehaus.snapshots</id>
+			<url>http://snapshots.repository.codehaus.org</url>
+		</repository>
+		<repository>
+			<id>OpenQA_Release</id>
+			<name>OpenQA Release Repository</name>
+			<url>http://archiva.openqa.org/repository/releases/</url>
+			<releases>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>jboss</id>
+			<name>Jboss repo</name>
+			<url>http://repository.jboss.com/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>ibiblio.org</id>
+			<name>ibiblio</name>
+			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+		</repository>
+		<repository>
+			<id>dist.wso2.org</id>
+			<name>wso2</name>
+			<url>http://dist.wso2.org/maven2</url>
+		</repository>
+		<repository>
+			<id>m2proxy.atlassian.com</id>
+			<name>m2proxy.atlassian</name>
+			<url>https://m2proxy.atlassian.com/repository/public/</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+
+		<!--
+			As above, this can be commented out when access to the snapshot
+			version of a Tapestry Maven plugin is not required.
+		-->
+		<pluginRepository>
+			<id>tapestry-snapshots</id>
+			<url>http://tapestry.formos.com/maven-snapshot-repository/</url>
+		</pluginRepository>
+
+
+	</pluginRepositories>
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+
+	<properties>
+		<tapestry-release-version>5.1.0.1</tapestry-release-version>
+	</properties>
+</project>

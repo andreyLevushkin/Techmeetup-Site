@@ -1,0 +1,38 @@
+<div xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+	id="innerDialog">
+
+<div id="profile">
+<h1>${user.name}</h1>
+<div class="image_col"><img src="${user.profileImage.url}" alt="" />
+<h2>Websites:</h2>
+<ul>
+	<li t:type="Loop" t:source="user.websites" t:value="website"><a
+		href="${website}" target="_blank">${websiteNice}</a></li>
+</ul>
+<t:if test="user.hasTwitter">
+	<h2>Twitter</h2>
+	<a href="${user.twitterProfileLink}">${user.twitterProfile}</a>
+</t:if></div>
+
+<h2>Mini Bio</h2>
+<p>${user.aboutMe}</p>
+
+<h2>Techmeetups I attend</h2>
+<p>
+<ul>
+	<li t:type="Loop" t:source="user.meetups" t:value="meetup"><a>${meetup.name}</a></li>
+</ul>
+</p>
+
+<h2>Tags</h2>
+<p><span>Core skills:</span> <t:Loop source="user.expertTags"
+	value="thisTag"> ${thisTag.tagString} </t:Loop></p>
+<p><span>Interested in:</span> <t:Loop source="user.interestTags"
+	value="thisTag">${thisTag.tagString} </t:Loop></p>
+<!-- <p><img src="/images/facebook.jpg" alt="facebook" /> <a href="#"></p>
+	<p><img src="/images/twitter.jpg" alt="twitter" /> <a href="#">${user.twitterProfile}</a></p>
+	<p><img src="/images/linkedin.jpg" alt="linked in" /> <a href="#"></a></p>-->
+
+<a href="" onclick="closeDialog();return false;">Close X</a></div>
+
+</div>

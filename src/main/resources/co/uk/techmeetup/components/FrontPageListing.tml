@@ -1,0 +1,30 @@
+
+<ul class="has_border"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+	<li class="bottom_separator" t:type="Loop" t:source="listedEntities"
+		t:value="thisEntity"><!--This is a plain blog post--> <t:if
+		test="prop:isBlog">
+		<h2><a href="#" t:type="PageLink" t:page="ArticleDetailsPage" t:context="blogPost.id">${blogPost.title}</a></h2>
+		<p class="comment_count">${commentCount}</p>
+		<p class="post_info">Posted by <t:UserName user="blogPost.owner"/>
+		on ${blogPost.created}</p>
+		<a href="#" t:type="PageLink" t:page="ArticleDetailsPage" t:context="blogPost.id"><img src="${blogPost.mainImage.url}" alt="" /></a>
+		<p class="post_body">${blogPost.bodyNice}</p>
+		<a href="FullPost.html" class="read_more" t:type="PageLink" t:page="ArticleDetailsPage" t:context="blogPost.id">READ MORE</a>
+	</t:if>
+	
+	<t:if test="prop:isVideo">
+	
+		<h2><a href="#" t:type="PageLink" t:page="VideoDetailsPage" t:context="prop:video.id">${video.name}</a></h2>
+		<p class="comment_count">${commentCount}</p>
+		<p class="post_info">Posted by <t:UserName user="video.speaker"/>
+		on ${video.niceCreated}</p>
+		<a href="#" t:type="PageLink" t:page="VideoDetailsPage" t:context="prop:video.id"><img src="${video.thumbnail.url}" alt="" /></a>
+		<p class="post_body">${video.description}</p>
+		<a href="FullPost.html" class="read_more" t:page="VideoDetailsPage" t:context="prop:video.id">READ MORE</a>
+		
+	</t:if>
+	
+	</li>
+	
+</ul>

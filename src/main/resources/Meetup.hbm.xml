@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="co.uk.techmeetup.data.Meetup" table="Meetups">
+		<id name="id" column="meetup_id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<set name="admins" table="Meetup_Admins">
+			<key column="admin__id" />
+			<many-to-many  class="co.uk.techmeetup.data.User" />
+		</set>
+	</class>
+
+</hibernate-mapping>

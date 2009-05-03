@@ -1,0 +1,43 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<body t:type="layout">
+<!--main content goes here-->
+<div id="main_column">
+<form action="#" t:type="Form" t:id="postVideoForm">
+<h1 id="main_title">Post a Blog entry to <select t:type="select"
+	t:id="meetupSelect" t:value="selectedMeetup" t:model="meetupOptions"
+	t:blankOption="NEVER">
+	<option>Edinburgh</option>
+</select></h1>
+<p><label>Video Title: </label><input type="text" t:type="TextField"
+	t:id="videoName" t:validate="required" /></p>
+<p><label for="post">About the video: </label> <textarea cols="80"
+	rows="10" name="post" t:type="TextArea" t:id="aboutVideo"
+	t:validate="required">
+      </textarea></p>
+<p><label for="post">About the speaker: </label> <textarea cols="80"
+	rows="10" name="post" t:type="TextArea" t:id="aboutSpeaker"
+	t:validate="required">
+      </textarea></p>
+<p><label>Thumbnail image:</label> <input type="file" name="image"
+	t:type="Upload" t:id="thumbnail" value="thumbnail"
+	t:validate="required" /></p>
+<p><label>Vimeo Clip ID:</label> <input type="text"
+	t:type="TextField" t:id="vimeoId" t:validate="required" /></p>
+<p><label>Speaker</label><input type="text" t:type="TextField"
+	t:id="speakerName" t:validate="required" /></p>
+<p><label>Tags</label><input type="text" t:type="TextField"
+	t:id="tags" t:validate="required" /></p>
+<p><input type="submit" /></p>
+</form>
+
+</div>
+
+<!--Secondary content goes here -->
+<div id="sidebar"><t:AdminNav />
+
+</div>
+
+</body>
+
+</html>

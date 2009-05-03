@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>${question.bodyShort}</title>
+</head>
+<body t:type="Layout"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<t:zone id="fullPageZone">
+	<!-- main content goes here -->
+	<div id="main_column">
+	<div id="discussion_topic">
+	<h1>${question.title}</h1>
+	<img src="${question.owner.profileImage.url}" alt="" />
+	<p><t:OutputRaw value="prop:question.body"></t:OutputRaw></p>
+	<p class="discussion_info">Asked by <t:UserName
+		user="question.owner" /> on ${question.niceCreated} | ${commentCount}</p>
+	<p class="tags">Tags:<t:Loop source="question.tags" value="tag"> ${tag.tag.tagString} </t:Loop></p>
+	</div>
+
+	<div class="t-zone" id="mainContentZone">
+	<div id="discussion_answers">
+	<h1>Answers</h1>
+	<ul id="answers">
+		<li class="${commentClass}" t:type="Loop" t:source="question.comments"
+			t:value="comment" t:index="commentIndex">
+		<div class="body"><img src="${comment.owner.profileImage.url}"
+			alt="picture of comment.owner.name" />
+		<p><t:OutputRaw value="prop:comment.body"></t:OutputRaw></p>
+		
+		</div>
+		<div class="comment_info">
+		<p class="discussion_info">by <t:UserName user="comment.owner" />
+		on ${comment.niceCreated}</p>
+		<!-- <p class="inappropriate_flag">FLAG AS INAPPROPRIATE</p>--></div>
+		</li>
+	</ul>
+	</div>
+	</div>
+
+	<div id="comment_form"><t:if test="loggedIn">
+		<form method="post" action="#" t:type="Form" t:id="newCommentForm">
+		<p><label for="post_comment">Post Comment</label><br />
+		<textarea name="post_comment" rows="5" cols="30" t:type="TextArea"
+			t:value="newCommentBody" t:validate="required" t:id="newCommentField"></textarea>
+		<input type="submit" name="submit" value="POST" /></p>
+		</form>
+	</t:if> <t:if test="loggedIn" negate="true">
+		<p class="login_to_post">Please <a href="#" t:type="PageLink"
+			t:page="LoginPage" class="login_link">login</a> to post a comment</p>
+	</t:if></div>
+	</div>
+
+
+	<!-- Secondary content goes here -->
+	<div id="sidebar">
+	<h3><a href="#" t:type="PageLink" t:page="DiscussionPage"
+		class="back_button">Return to discussions</a></h3>
+	<!-- <div id="following">
+	<h3>You are following this discussion <a href="" class="question">(?)</a></h3>
+	<p><a href="">STOP FOLLOWING</a></p>
+	<p><a href="">EMAIL TO A FRIEND</a></p>
+	</div>
+	--></div>
+</t:zone>
+</body>
+
+
+</html>

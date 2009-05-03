@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Join Techmeetup</title>
+</head>
+<body t:type="layout">
+<div id="single_column">
+<h1 id="main_title">Sign Up</h1>
+<form action="#" t:type="form" t:id="joinForm"><t:errors />
+
+<p><label>Username</label> <input type="text" t:type="TextField"
+	t:validate="required" t:value="username" t:id="usernameField" /></p>
+<p>Select the Techmeetups you attend <t:palette
+	selected="selectedMeetups" encoder="meetupEncoder" model="meetupModel"
+	disabled="false" size="4"  t:select="selectImage" t:deselect="deselectImage"/></p>
+
+<p><label>Profile Photo</label> <input type="file" t:type="Upload"
+	t:id="profilePictureField" t:value="profilePicture" /></p>
+<p><label>Email</label> <input id="email" type="text"
+	t:type="TextField" t:validate="required,regexp" t:id="emailField"
+	t:value="email" /> <span>This is for verification only, it will
+not be visible on your profile - don't worry</span></p>
+
+<fieldset><legend> Please enter any websites you are
+involved in:</legend>
+<p t:type="ajaxformloop" t:id="websites" t:source="websites"
+	t:encoder="stringValueEncoder" t:value="website"><t:textfield
+	t:id="website" value="website" />  <t:removerowlink>Remove</t:removerowlink>
+</p>
+</fieldset>
+
+<fieldset><legend>Pick some tags that describe you</legend>
+
+	<p><label>Core skills</label> <input type="text" t:type="TextField"
+	t:value="expertTags" t:id="expertTagsField" /> 
+	<span class="eg">e.g. tech sales, programmer</span>
+	</p>
+	
+	
+	<p>
+		<label>Interests:</label> 
+		<input type="text" t:type="TextField" t:value="interestTags" t:id="interestTagsField"/>
+		<span class="eg">e.g. interface design, virtualization</span>
+	</p>
+</fieldset>
+<fieldset><legend class="fake_label">Social
+Networking profile URLs</legend>
+<!-- 
+<p><img src="${asset:context:images/facebook.jpg}"
+	alt="facebook logo" /> <input type="text" t:type="TextField"
+	t:id="facebookProfile" t:value="facebookProfile" /></p>
+	 -->
+<p><img src="${asset:context:images/twitter.jpg}" alt="twitter logo" />
+<input type="text" t:type="TextField" t:id="twitterProfile"
+	t:value="twitterProfile" /></p>
+<!-- 
+<p><img src="${asset:context:images/linkedin.jpg}"
+	alt="LinkedIn logo" /> <input type="text" t:type="TextField"
+	t:id="linkedinProfile" t:value="linkedinProfile" /></p>
+	 -->
+</fieldset>
+<p>
+<label for="aboutMeField">About Me</label>
+<textarea cols="80" rows="8" t:type="TextArea" t:value="aboutMe" t:id="aboutMeField"></textarea>
+</p>
+<div id="password_confirm">
+<p><label>Password</label>
+	<input type="text" t:type="PasswordField"
+	t:id="passwordField" t:validate="required,minLength=6" t:value="password" /></p>
+
+<p><label>Confirm password</label>
+	<input type="text"
+	t:type="PasswordField" t:id="passwordConfirmField"
+	t:validate="required" t:value="passwordConfirm" /></p>
+
+</div>
+<p><input type="submit" value="Join"/></p>
+</form>
+</div>
+
+</body>
+</html>

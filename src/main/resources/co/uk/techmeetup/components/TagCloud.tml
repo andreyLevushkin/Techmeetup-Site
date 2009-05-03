@@ -1,0 +1,14 @@
+<t:container
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+	<t:if test="prop:hasNoTags" negate="true">
+		<h3>Related Tags</h3>
+		<ul id="tag_cloud"
+			xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+			<li t:type="Loop" t:source="tagStrings" t:value="thisTag"
+				class="${tagClass}" xml:space="preserve"><a href="#"
+				class="tag">${thisTag.tag}</a></li>
+		</ul>
+
+	</t:if>
+
+</t:container>

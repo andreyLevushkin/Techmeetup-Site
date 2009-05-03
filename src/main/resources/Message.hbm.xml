@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="co.uk.techmeetup.data.Message" table="Messages">
+		<id name="id" column="message_id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="timestamp" column="time_stamp" type="timestamp" />
+		<property name="body" column="body" />
+		<many-to-one name="from" column="sent_from" not-null="true" />
+		<many-to-one name="to" column="sent_to" not-null="true" />
+		
+	</class>
+</hibernate-mapping>

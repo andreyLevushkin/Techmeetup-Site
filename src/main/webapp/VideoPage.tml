@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+
+<body t:type="layout" page="literal:video">
+<t:zone id="fullPageZone">
+	<!--main content goes here-->
+	<div id="main_column">
+	<div id="featured">
+	<h1>Featured Videos</h1>
+	<ul>
+		<li t:type="Loop" t:source="featuredVideoList" t:value="thisVideo">
+		<a t:type="PageLink" t:page="VideoDetailsPage"
+			t:context="thisVideo.id" href="VideoDetailsPage.html"> <img
+			src="${thisVideo.thumbnail.url}" alt="video thumbnail" /> </a>
+		<h3>${thisVideo.name}</h3>
+		<p class="date">${thisVideo.niceCreated}</p>
+		</li>
+
+	</ul>
+	</div>
+	<t:zone id="mainContentZone">
+		<t:VideoListing videos="prop:entities" />
+	</t:zone> <t:zone id="paginationZone">
+		<t:Pagination isLast="prop:lastPage" />
+	</t:zone></div>
+
+	<!--Secondary content goes here -->
+	<div id="sidebar"><t:tagCloudSearch entityTags="prop:cloudTags" />
+	</div>
+</t:zone>
+</body>
+</html>
+
+

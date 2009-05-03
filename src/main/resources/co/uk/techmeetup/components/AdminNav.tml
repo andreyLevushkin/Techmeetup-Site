@@ -1,0 +1,16 @@
+<t:container
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+	<h1>Admin Actions</h1>
+	<ul>
+		<li><a t:type="PageLink" t:page="AdminPostBlog">Post a bolg
+		entry</a></li>
+		<li><a t:type="PageLink" t:page="AdminPostVideo">Post a video</a></li>
+		<li><a t:type="PageLink" t:page="CreateEventPage">Create
+		Event</a></li>
+		<li><a t:type="PageLink" t:page="SetFeaturedPage">Set
+		featured</a></li>
+		<t:if test="isMetaAdmin">
+			<li><a t:type="PageLink" t:page="SiteAdminPage">Site Admin</a></li>
+		</t:if>
+	</ul>
+</t:container>

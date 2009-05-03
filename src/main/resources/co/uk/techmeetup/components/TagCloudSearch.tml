@@ -1,0 +1,16 @@
+<t:container
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+	<h2>Search</h2>
+	<div id="search_and_browse">
+	<form action="#" t:type="Form" t:id="tagSearchForm"
+		t:zone="fullPageZone"><input t:type="TextField"
+		t:value="searchStringValue" t:id="searchString" type="text" />
+		<a href="#" class="clear_tags">clear</a></form>
+	<t:zone id="tagCloudZone">
+		<t:if test="prop:hasTags">
+			<t:TagCloud tags="prop:entityTags" />
+		</t:if>
+	</t:zone></div>
+
+</t:container>

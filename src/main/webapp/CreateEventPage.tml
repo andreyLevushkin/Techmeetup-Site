@@ -1,0 +1,45 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<body t:type="Layout">
+<!--main content goes here-->
+<div id="main_column">
+<h1>Create a new event</h1>
+<p>Note that all events must be approved by a moderator before they
+will be displayed</p>
+<form action="#" t:type="form" t:id="createEventForm">
+<t:errors/>
+<p><label for="name">Name</label> <input type="text" name="name"
+	t:type="TextField" t:value="name" t:validate="required"/></p>
+
+<p><label for="description">Description:</label> <textarea cols="80"
+	rows="5" name="description" t:type="TextArea" t:value="description" t:validate="required"></textarea></p>
+<p><label for="venue">Venue and directions</label> <input
+	type="text" t:type="TextField" t:value="venue" t:validate="required"/></p>
+<p><label >Meetup:</label>	<select t:type="select" t:id="selectMeetup"
+	t:value="meetup" t:model="meetupOptions" t:blankOption="NEVER">
+	<option>Edinburgh</option>
+</select></p>
+<p><label for="date">Date:</label><input type="text" t:type="DateField" t:value="date" t:validate="required"/></p>
+<p><label for="time">Time and duration</label> <input type="text" t:type="TextField" t:value="time"
+	name="time" t:validate="required"/></p>
+<p><label for="cost">Cost:</label> <input type="text" name="cost"
+	t:type="TextField" t:validate="regexp" t:value="cost" t:id="cost"/></p>
+<p><label for="tags">Tags:</label> <input type="text" name="tags"
+	t:type="TextField" t:value="tags" /></p>
+<p><label for="website">Website:</label> <input type="text"
+	name="website" t:type="TextField" t:value="website" t:validate="regexp" t:id="website"/></p>
+	<p><label for="eventImageField">Image: </label><input type="file" t:validate="required" t:type="Upload"
+	t:id="eventImageField" t:value="eventImage" /></p>
+	<p><input type="submit" /></p>
+</form>
+</div>
+
+<!--Secondary content goes here -->
+<div id="sidebar"><t:if test="adminControl">
+	<h1>Admin Controls</h1>
+	<a href="#">Approve</a>
+	<a href="#">Contact poster</a>
+	<a href="#">Reject</a>
+
+</t:if>	<t:AdminNav /></div>
+</body>
+</html>

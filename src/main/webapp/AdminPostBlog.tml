@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+
+<title>Techmeetup</title>
+<link rel="Stylesheet" type="text/css" href="full.css" media="all" />
+
+</head>
+
+<body>
+<t:layout>
+
+	<!--main content goes here-->
+	<div id="main_column">
+	<form t:type="Form" t:id="postBlogForm" action="#">
+	<h1 id="main_title">Post a Blog entry to <select t:type="select"
+		t:id="selectMeetup" t:value="selectedMeetup" t:model="meetupOptions"
+		t:blankOption="NEVER">
+		<option>Edinburgh</option>
+	</select></h1>
+
+
+	<p><label for="title">Title: </label> <input type="text"
+		t:type="TextField" t:id="title" t:validate="required" /></p>
+	<p><label for="post">Blog post: </label> <textarea
+		t:type="TextArea" t:id="body" cols="80" rows="20" name="post"
+		t:validate="required">
+      </textarea></p>
+	<p><label for="mainImage">Main image:</label> <input type="file"
+		name="mainImage" t:type="Upload" t:id="mainImage" value="mainImage"
+		t:validate="required" /></p>
+	<p><label>Additional Images:</label> <input type="file"
+		name="image1" /></p>
+	<p><input type="submit" value="Post" /></p>
+	</form>
+
+	</div>
+
+	<!--Secondary content goes here -->
+	<div id="sidebar"><t:AdminNav /></div>
+
+</t:layout>
+</body>
+
+</html>

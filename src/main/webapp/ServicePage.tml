@@ -1,0 +1,5 @@
+<body xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<t:block>
+	<t:ExternalUserProfile t:id="externalUserProfile" />
+</t:block>
+</body>

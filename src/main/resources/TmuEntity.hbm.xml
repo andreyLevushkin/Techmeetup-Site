@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="co.uk.techmeetup.data.TmuEntity">
+
+		<id name="id" column="entity_id">
+			<generator class="hilo">
+				<param name="table">Hi_Value</param>
+				<param name="column">next_value</param>
+				<param name="max_lo">100</param>
+			</generator>
+		</id>
+
+		<property name="created" column="created" not-null="true" type="timestamp"/>
+		<many-to-one name="owner" column="owner_id" />
+		<many-to-one name="meetup" column="meetup_id" />
+
+		<set name="comments" table="Entity_Comments" sort="natural">
+			<key column="comment_on" />
+			<one-to-many class="co.uk.techmeetup.data.Comment" />
+			
+		</set>
+
+		<set name="images" table="Entity_Images">
+			<key column="entity_id" />
+			<many-to-many column="image_id" class="co.uk.techmeetup.data.Image" />
+		</set>
+
+		<set name="tags" table="TagInstances">
+			<key column="tagged" />
+			<one-to-many class="co.uk.techmeetup.data.TagInstance" />
+		</set>
+
+		<joined-subclass name="co.uk.techmeetup.data.Comment"
+			table="Comments">
+			<key column="entity_id" />
+			<property name="body" type="text"/>
+			<property name="removed" />
+			<many-to-one name="commentOn" column="comment_on"
+				not-null="true" />
+		</joined-subclass>
+
+		<joined-subclass name="co.uk.techmeetup.data.BlogPost"
+			table="Blog_Posts">
+			<key column="entity_id" />
+			<many-to-one name="approvedBy" column="approved_by"
+				not-null="true" />
+			<property name="title" />
+			<property name="body" type="text"/>
+			<many-to-one name="mainImage" column="main_image"
+				not-null="false" />
+
+		</joined-subclass>
+
+		<joined-subclass name="co.uk.techmeetup.data.Image"
+			table="Images">
+			<key column="entity_id" />
+			<property name="url" column="url" />
+			<set name="imageEntities" table="Entity_Images">
+				<key column="image_id" />
+				<many-to-many column="entity_id" class="co.uk.techmeetup.data.TmuEntity" />
+			</set>
+		</joined-subclass>
+		<joined-subclass name="co.uk.techmeetup.data.Event"
+			table="Events">
+			<key column="entity_id" />
+			<property name="title" column="title" />
+			<property name="description" column="description" type="text"/>
+			<property name="cost" column="cost" />
+			<property name="location" column="location" />
+			<property name="date" column="date" type="timestamp" />
+			<property name="time" />
+			<property name="website" />
+			<property name="lastChanged" column="last_changed" type="timestamp" />
+			<many-to-one name="approvedBy" column="approvedBy" />
+			<many-to-one name="image" column="image_id" />
+			<property name="approvedOn" column="approvedOn" />
+			<property name="status" />
+		</joined-subclass>
+
+		<joined-subclass name="co.uk.techmeetup.data.Video"
+			table="Videos">
+			<key column="entity_id" />
+			<property name="vimeoId" type="long" />
+			<property name="name" />
+			<property name="description" type="text"/>
+			<property name="speakerDescription" type="text"/>
+			<many-to-one name="speaker" column="speaker" not-null="false" />
+			<many-to-one name="thumbnail" column="thumbnail"
+				not-null="false" />
+		</joined-subclass>
+
+		<joined-subclass name="co.uk.techmeetup.data.Question"
+			table="Questions" lazy="false">
+			<key column="entity_id" />
+			<property name="title" />
+			<property name="body" type="text"/>
+		</joined-subclass>
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="co.uk.techmeetup.data.UserAction" table="Actions">
+
+		<id name="id" column="action_id">
+			<generator class="native" />
+		</id>
+		<property name="type" not-null="true" />
+		<property name="timestamp" column="time_stamp" not-null="true" />
+		<many-to-one name="entity" column="entity" not-null="true" />
+		<many-to-one name="user" column="user" not-null="true" />
+
+	</class>
+</hibernate-mapping>

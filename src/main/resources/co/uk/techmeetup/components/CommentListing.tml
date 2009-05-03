@@ -1,0 +1,15 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<h2>Comments</h2>
+<ul id="comments">
+	<li class="has_border" t:type="loop" t:value="thisComment"
+		t:source="comments"><a href=""><img
+		src="${thisComment.owner.profileImage.url}"
+		alt="profile image of the ${thisComment.owner.name}" /></a>
+
+	<p>${thisComment.body}</p>
+	<p class="sub_paragraph">${thisComment.niceCreated}<t:UserName
+		user="thisComment.owner" /></p>
+
+	</li>
+</ul>
+</t:container>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="co.uk.techmeetup.data">
+	<class name="TagInstance"  table="TagInstances">
+		<id name="id" column="tag_instance_id">
+			<generator class="native" />
+		</id>
+		<property name="timestamp" column="time_stamp" type="timestamp" />
+		<many-to-one name="tagger" column="tagger" />
+		<many-to-one name="tagged" column="tagged" />
+		<many-to-one name="tag" column="tag" />
+	</class>
+</hibernate-mapping>

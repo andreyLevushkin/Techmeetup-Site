@@ -1,0 +1,16 @@
+<div xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<h1>People</h1>
+<ul >
+	<li class="people_listing" t:type="Loop" t:source="users"
+		t:value="user">
+
+		<img src="${user.profileImage.url}" alt="profile image" />
+		
+
+	<h3><t:UserName user="user"/></h3>
+	<p class="sub_paragraph location">Edinburgh</p>
+	<p class="sub_paragraph occupation">Web developer</p>
+	</li>
+
+</ul>
+</div>

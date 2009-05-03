@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head>
+
+<title>Techmeetup site admin</title>
+</head>
+
+<body>
+<t:layout>
+	<div id="main_column"><a href="#" t:type="ActionLink"
+		t:id="reindex">Reindex the database</a>
+	<p>This is a slow proccess and will load the server - only do this
+	if ou really need to</p>
+
+	<p>Current techmeetups:</p>
+	<ul>
+		<li></li>
+	</ul>
+
+	<form action="#" t:type="Form"><label for="newTechmeetup">Add
+	a tech meetup</label> <input type="text" t:type="TextField"
+		t:id="newTechmeetup" t:validate="required" /> <input type="submit" />
+	</form>
+	</div>
+	<div id="sidebar"><t:AdminNav /></div>
+</t:layout>
+</body>
+</html>

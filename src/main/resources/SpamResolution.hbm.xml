@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="co.uk.techmeetup.data.SpamResolution" table="Spam_Resolution">
+		<id name="id" column="spam_id">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="content" column="content" not-null="true" />
+		<many-to-one name="markedBy" column="marked_by" not-null="true" />
+		<many-to-one name="resolvedBy" column="resolved_by"
+			not-null="true" />
+		<property name="markDate" column="mark_date" type="timestamp" />
+		<property name="resolveDate" column="resolve_date" type="timestamp" />
+		<property name="resolveOutcome" column="resovle_outcome" />
+		<set name="messages" table="Spam_Resolution_Messages">
+			<key column="message_id" />
+			<many-to-many column="spam_id" class="co.uk.techmeetup.data.Message" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="co.uk.techmeetup.data.User" table="Users">
+
+		<id name="id" column="user_id">
+			<generator class="native" />
+		</id>
+		<property name="name" unique="true" />
+		<property name="passwordHash" column="password_hash" />
+		<property name="passwordSalt" column="password_salt" />
+		<property name="joined" column="joined" type="timestamp" />
+		<property name="lastLogin" column="last_login" type="timestamp" />
+		<property name="email" unique="true" />
+		<property name="facebookProfile" />
+		<property name="twitterProfile" />
+		<property name="linkedinProfile" />
+		<property name="type" />
+		<property name="notificationsEnabed"/>
+		<property name="aboutMe"/>
+		<many-to-one name="profileImage" column="image_id" />
+		<set name="expertTags">
+			<key column="tag_id" />
+			<many-to-many class="co.uk.techmeetup.data.Tag" />
+		</set>
+		<set name="interestTags">
+			<key column="tag_id" />
+			<many-to-many class="co.uk.techmeetup.data.Tag" />
+		</set>
+		<list name="owned" table="TmuEntity">
+			<key column="entity_id" />
+			<index column="created" />
+			<one-to-many class="co.uk.techmeetup.data.TmuEntity" />
+		</list>
+		<list name="actions" table="User_Actions">
+			<key column="action_id" />
+			<index column="timestamp" />
+			<one-to-many class="co.uk.techmeetup.data.UserAction" />
+		</list>
+		<set name="adminFor" table="Meetup_Admins">
+			<key column="meetup__id" />
+			<many-to-many  class="co.uk.techmeetup.data.Meetup" />
+		</set>
+		<set name="meetups">
+			<key column="user_id" />
+			<many-to-many class="co.uk.techmeetup.data.Meetup" />
+		</set>
+
+		<set name="websites" >
+			<key column="user_id" />
+			<element column="website" type="string"/>
+		</set>
+		
+
+	</class>
+</hibernate-mapping>

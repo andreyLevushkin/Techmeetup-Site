@@ -1,0 +1,82 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<body t:type="Layout">
+<t:zone id="fullPageZone">
+	<!-- main content goes here -->
+	<div id="main_column">
+	<div id="profile">
+	<h1>Edit your profile</h1>
+	<form method="post" action="#" t:type="Form" t:id="updateProfileForm">
+	<t:errors></t:errors>
+	<div class="image_left"><img src="${user.profileImage.url}"
+		alt="Image of ${user.name}" /> <label>Change profile photo:<br />
+	<input type="file" t:type="Upload" t:id="profilePictureField"
+		t:value="profilePicture" /></label></div>
+
+	<p><label for="aboutMeField">About Me</label><br /> <textarea cols="80"
+		rows="8" t:type="TextArea" t:value="aboutMe" t:id="aboutMeField"></textarea>
+	</p>
+	<p>I attend Techmeetups in</p>
+	<t:palette selected="selectedMeetups" encoder="meetupEncoder"
+		model="meetupModel" t:select="selectImage" t:deselect="deselectImage" disabled="false" size="4" />
+
+	<p><label>Email:<br />
+	<input type="text" name="email" t:type="TextField" t:value="email"
+		t:id="emailField" t:validate="regexp" /> </label><br />
+	</p>
+	<p>Please enter any websites you are involved in:</p>
+	<p t:type="ajaxformloop" t:id="websites" source="websites"
+		encoder="stringValueEncoder" value="website"><t:textfield
+		t:id="website" value="website"  /> <t:removerowlink>Remove</t:removerowlink>
+	</p>
+
+	<p><label>Expert in:<br />
+	<input type="text" name="expertise" t:type="TextField"
+		t:value="expertTags" t:id="expertTagsField" /> </label><br />
+	</p>
+	<p><label>Interests:<br />
+	<input type="text" name="interests" t:type="TextField"
+		t:value="interestTags" t:id="interestTagsField" /> </label><br />
+	</p>
+	<!-- <p><label>Facebook profile:<br />
+	<input type="text" name="facebook_profile" t:type="TextField"
+		t:id="facebookProfile" t:value="facebookProfile" /> </label><br />
+	</p>-->
+	<p><label>Twitter:<br />
+	<input type="text" name="facebook_profile" t:type="TextField"
+		t:id="twitterProfile" t:value="twitterProfile" /> </label><br />
+	</p>
+	<!-- <p><label>LinkedIn profile:<br />
+	<input type="text" name="facebook_profile" t:type="TextField"
+		t:id="linkedinProfile" t:value="linkedinProfile" /> </label><br />
+	</p>-->
+	<div id="notification_settings">
+		<fieldset><legend>Email notifications</legend>
+		<p>Get notified when new questions are posted to the Discussion Board</p>
+		<p id="notifications_radio"><t:RadioGroup t:id="notifications" t:value="notifications">
+			<label for="enabled">Enabled:</label>
+			<input type="radio" t:type="Radio" t:id="enabled" />
+			<label for="disabled">Disabled:</label>
+			<input type="radio" t:type="Radio" t:id="disabled" />			
+		</t:RadioGroup></p>
+		</fieldset>
+	</div>
+	<p><label>Password</label><br />  <input type="text"
+		t:type="PasswordField" t:id="passwordField" t:value="password"
+		t:validate="minLength=6" /></p>
+
+	<p><label>Confirm password</label><br />  <input type="text"
+		t:type="PasswordField" t:id="passwordConfirmField"
+		t:value="passwordConfirm" t:validate="minLength=6" /></p>
+
+
+
+	<p><input type="submit" value="update" /></p>
+	</form>
+
+	</div>
+	</div>
+	<!-- Secondary content goes here -->
+	<div id="sidebar"></div>
+</t:zone>
+</body>
+</html>

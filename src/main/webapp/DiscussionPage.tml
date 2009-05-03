@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>
+<meta http-equiv="pragma" content="no-cache" />
+<META HTTP-EQUIV="Expires" CONTENT="-1" />
+<title>Techmeetup - Discussion</title>
+<link rel="Stylesheet" type="text/css" href="full.css" media="all" />
+</head>
+
+<body t:type="layout" t:page="literal:discussion">
+
+<t:zone id="fullPageZone">
+	<!--main content goes here-->
+	<div id="main_column">
+
+	<div id="ask_question">
+	<h1>Ask a question</h1>
+	<t:if test="loggedIn">
+		<form action="#" t:type="Form" t:id="postQuestion">
+		<div id="form_body">
+		<p><label for="title">Question</label> <input type="text"
+			name="title" t:type="TextField" t:value="title" t:validate="required"
+			t:id="titleField" /><!-- <a
+			href=""><img src="images/help_button.jpg" alt="help" /></a>--></p>
+		<p><label for="question">Details:</label> <textarea
+			name="question" t:type="TextArea" t:value="body"
+			t:validate="required" t:id="bodyField"></textarea><!-- <a href=""><img
+			src="images/help_button.jpg" alt="help" /></a>--></p>
+		<p><label for="tags">Tags</label> <input type="text" name="tags"
+			t:id="tagsField" t:type="TextField" t:value="tags"
+			t:validate="required" /><!-- <a href=""><img
+			src="images/help_button.jpg" alt="help" /></a>--></p>
+		</div>
+		<p><input type="submit" class="form_submit" value="Submit"></input>
+		</p>
+		</form>
+	</t:if> <t:if test="loggedIn" negate="true">
+		<p class="login_to_post">Please <a href="#" t:type="PageLink"
+			t:page="LoginPage" class="login_link">login</a> to post a question</p>
+	</t:if></div>
+	<t:zone id="mainContentZone">
+		<t:DiscussionList questions="prop:entities"
+			userSearch="prop:userSearch" />
+	</t:zone> <t:zone id="paginationZone">
+		<t:Pagination isLast="prop:lastPage" />
+	</t:zone></div>
+
+	<!--Secondary content goes here -->
+	<div id="sidebar"><t:tagCloudSearch entityTags="prop:cloudTags" />
+	<t:PopularTagList type="tagClass" /> <t:EventShortList /></div>
+</t:zone>
+<t:block>
+	<t:ExternalUserProfile />
+</t:block>
+
+</body>
+
+</html>

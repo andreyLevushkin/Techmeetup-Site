@@ -1,0 +1,19 @@
+<div id="events_list"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<h1>Upcoming Events</h1>
+<ul class="has_border">
+	<li class="dark" t:type="Loop" t:source="events" t:value="event"><a
+		t:type="PageLink" t:page="EventDetailsPage" t:context="prop:event.id"
+		href="#"><img src="${event.image.url}" alt="event logo" /> </a>
+	<div class="event_details">
+	<h2><a t:type="PageLink" t:page="EventDetailsPage"
+		t:context="prop:event.id">${event.title}</a></h2>
+	<p class="date">${event.date}</p>
+	<p>${event.description}</p>
+	<p class="sub_paragraph">Venue: ${event.location}</p>
+	<p class="sub_paragraph">Time:${event.time}</p>
+	</div>
+	</li>
+
+</ul>
+</div>

@@ -1,0 +1,18 @@
+<div id="video_list"  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<h1>Recent Videos</h1>
+<ul>
+
+	<li class="${videoClass}" t:type="loop" t:source="videoList"
+		t:index="loopIndex" t:value="thisVideo"><a t:type="PageLink"
+		t:page="VideoDetailsPage" t:context="thisVideo.id"
+		href="VideoDetailsPage.html"> <img
+		src="${thisVideo.thumbnail.url}" alt="video thumbnail" /> </a>
+
+	<div>
+	<h3><a href="VideoDetailsPage.html"> ${thisVideo.name} </a></h3>
+	<p class="date">${thisVideo.niceCreated}</p>
+	<p>By <a href="" class="person">${thisVideo.speaker.name}</a></p>
+	</div>
+	</li>
+</ul>
+</div>

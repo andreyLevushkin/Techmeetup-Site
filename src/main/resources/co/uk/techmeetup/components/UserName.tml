@@ -1,0 +1,1 @@
+<a href="#" onclick="showUserProfileDialog(${user.id});return false;">${user.name}</a>

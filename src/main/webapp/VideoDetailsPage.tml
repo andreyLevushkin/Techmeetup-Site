@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>
+
+<title>Techmeetup</title>
+<link rel="Stylesheet" type="text/css" href="full.css" media="all" />
+</head>
+
+<body t:type="layout">
+
+
+<!--main content goes here-->
+<div id="main_column">
+<h1>${video.name} by ${video.speaker.name}</h1>
+<div id="video"><object width="390px" height="442px">
+	<param name="allowfullscreen" value="true" />
+	<param name="allowscriptaccess" value="always" />
+	<param name="movie"
+		value="http://vimeo.com/moogaloop.swf?clip_id=${video.vimeoId}&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=&amp;fullscreen=1" />
+	<embed
+		src="http://vimeo.com/moogaloop.swf?clip_id=${video.vimeoId}&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=&amp;fullscreen=1"
+		type="application/x-shockwave-flash" allowfullscreen="true"
+		allowscriptaccess="always" width="620" height="500"></embed> </object> <br />
+</div>
+<h2>About this talk</h2>
+<p>${video.description}</p>
+<h2>About <t:UserName user="video.speaker" /></h2>
+<p>${video.speakerDescription}</p>
+
+
+<t:zone id="commentZone">
+
+	<t:CommentListing comments="video.comments" />
+</t:zone> <t:if test="loggedIn">
+	<form id="postComment" action="#" class="post_comment_box"
+		t:type="form" t:id="postComment" t:context="videoId"
+		t:zone="commentZone">
+	<h2>Post a comment</h2>
+	<p><textarea cols="82" rows="4" t:type="TextArea"
+		t:value="newComment" t:validate="required"> </textarea></p>
+	<p><input type="submit" value="Post" class="post_comment_submit" /></p>
+	</form>
+</t:if> <t:if test="loggedIn" negate="true">
+		Please <a t:type="PageLink" t:page="LoginPage">log in </a>to post a comment
+		</t:if></div>
+
+<div id="sidebar">
+<h1 class="back_button"><a href="VideoPage.html">Back to Videos</a></h1>
+<div id="related_videos"><!-- 
+<h1>Related Videos</h1>
+<ul>
+	<li>
+	<h3><a href="">Title of this video</a></h3>
+	<a href=""><img alt="Thumbnail of a video"
+		src="images/video_thumb.jpg" width="68" height="52" /></a>
+	<p>Posted b <a href="" class="person">Someone</a> on 12.12.12</p>
+	</li>
+	<li>
+	<h3><a href="">Title of this video</a></h3>
+	<a href=""><img alt="Thumbnail of a video"
+		src="images/video_thumb.jpg" width="68" height="52" /></a>
+	<p>Posted b <a href="" class="person">Someone</a> on 12.12.12</p>
+	</li>
+	<li>
+	<h3><a href="">Title of this video</a></h3>
+	<a href=""><img alt="Thumbnail of a video"
+		src="images/video_thumb.jpg" width="68" height="52" /></a>
+	<p>Posted b <a href="" class="person">Someone</a> on 12.12.12</p>
+	</li>
+	<li>
+	<h3><a href="">Title of this video</a></h3>
+	<a href=""><img alt="Thumbnail of a video"
+		src="images/video_thumb.jpg" width="68" height="52" /></a>
+	<p>Posted b <a href="" class="person">Someone</a> on 12.12.12</p>
+	</li>
+	<li>
+	<h3><a href="">Title of this video</a></h3>
+	<a href=""><img alt="Thumbnail of a video"
+		src="images/video_thumb.jpg" width="68" height="52" /></a>
+	<p>Posted b <a href="" class="person">Someone</a> on 12.12.12</p>
+	</li>
+	<li>
+	<h3><a href="">Title of this video</a></h3>
+	<a href=""><img alt="Thumbnail of a video"
+		src="images/video_thumb.jpg" width="68" height="52" /></a>
+	<p>Posted b <a href="" class="person">Someone</a> on 12.12.12</p>
+	</li>
+</ul>
+ --></div>
+</div>
+
+</body>
+
+</html>
+
+

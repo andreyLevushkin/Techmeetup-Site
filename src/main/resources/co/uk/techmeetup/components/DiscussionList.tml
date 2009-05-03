@@ -1,0 +1,32 @@
+<div id="past_questions" class="has_border"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<h1>Discussions</h1>
+
+<t:if test="isLoggedIn">
+	<p id="filter_options"><a href="" id="all_questions"
+		onclick="clearSearchField();return false;"><span>All
+	Questions</span></a> <a href="" id="users_questions"
+		onclick="searchForUserQuestions();return false;"><span>Your
+	Questions</span></a> <!-- <a href="">Relevant</a>--></p>
+
+</t:if> <t:if test="prop:emptyUserSearch">
+	<p>Sorry but… you havn't posted any questions</p>
+</t:if>
+<ul>
+
+	<li t:type="Loop" t:source="questionList" t:value="thisQuestion"
+		t:index="loopIndex" class="${questionClass}">
+	<h3><a t:type="PageLink" t:page="DiscussionDetailPage"
+		t:context="prop:thisQuestion.id">${thisQuestion.title}</a></h3>
+	<p class="excerpt" ><t:OutputRaw t:value="thisQuestion.bodyShort"/></p>
+	<p>Asked by <t:UserName user="prop:thisQuestion.owner" />
+	${thisQuestion.niceCreated} <span class="separator">|</span>
+	${commentCount} <span class="separator">|</span> Tags: <a href="#"
+		class="tag" t:type="Loop" t:source="thisQuestion.tags"
+		t:value="thisTag"> ${thisTag.tag.tagString}</a></p>
+	</li>
+
+</ul>
+<t:if test="hasNoResults">
+	<p>Sorry but your search did not match any results</p>
+</t:if></div>
