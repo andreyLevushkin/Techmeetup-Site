@@ -41,6 +41,7 @@ public class ControlVars {
 		SUPPORTED_IMAGE_MIME = new HashSet<String>();
 		SUPPORTED_IMAGE_MIME.add("image/png");
 		SUPPORTED_IMAGE_MIME.add("image/jpeg");
+		SUPPORTED_IMAGE_MIME.add("image/jpg");
 		SUPPORTED_IMAGE_MIME.add("image/bmp");
 		SUPPORTED_IMAGE_MIME.add("image/gif");
 
