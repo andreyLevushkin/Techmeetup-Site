@@ -29,76 +29,33 @@ import co.uk.techmeetup.misc.ControlVars;
 import co.uk.techmeetup.misc.DescendingDateComparator;
 
 @EagerLoad
-public class NotificationServiceImpl extends Thread implements
-		NotificationService {
+public class NotificationServiceImpl implements NotificationService {
 
 	public static final long WAIT_INTERVAL = 1000 * 30;
 	public static final int SUBJECT_LENGTH = 60;
 
 	private boolean run = true;
 	private Session session;
-	private Date lastChecked;
+	private NotifierThread notifier;
 
 	public NotificationServiceImpl(Session session) {
 		this.session = session;
-		lastChecked = new Date();
-		start();
+		if (run) {
+			notifier = new NotifierThread();
+			notifier.start();
+		}
 	}
 
 	@Override
 	public void startNotifications() {
-		this.run = true;
+		throw new UnsupportedOperationException();
+		// TODO Write code to start the notifications
 	}
 
 	@Override
 	public void stopNotifications() {
-		this.run = false;
-	}
-
-	@Override
-	public void run() {
-		this.setPriority(MIN_PRIORITY);
-
-		while (true) {
-			while (run) {
-				Set<Question> toBeNotified = new HashSet<Question>();
-
-				/* Get new questions */
-				Criteria criteria = session.createCriteria(Question.class);
-				criteria.add(Restrictions.gt("created", lastChecked));
-				toBeNotified.addAll(criteria.list());
-
-				/* Get new Comments */
-				criteria = session.createCriteria(Comment.class);
-				criteria.add(Restrictions.gt("created", lastChecked));
-
-				/* Extract the origianl question from the comments */
-				for (Comment comment : (List<Comment>) criteria.list()) {
-					toBeNotified.add((Question) session.load(Question.class,
-							comment.getCommentOn().getId()));
-				}
-
-				/* Send notifications */
-				for (Question question : toBeNotified) {
-					List<User> usersToBeNotified = getUsers(question);
-					sendNotifications(question, usersToBeNotified);
-				}
-
-				lastChecked = new Date();
-
-				try {
-					Thread.sleep(WAIT_INTERVAL);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			try {
-				Thread.sleep(WAIT_INTERVAL);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			lastChecked = new Date();
-		}
+		throw new UnsupportedOperationException();
+		// TODO Write code to stop the notifications
 	}
 
 	private List<User> getUsers(Question question) {
@@ -113,8 +70,8 @@ public class NotificationServiceImpl extends Thread implements
 		return out;
 	}
 
-	private void sendNotifications(Question question, List<User> users) {
-		if (users == null || users.size() == 0) {
+	private void sendNotifications(Question question, List<User> usersToNotify) {
+		if (usersToNotify == null || usersToNotify.size() == 0) {
 			return;
 		}
 
@@ -126,13 +83,13 @@ public class NotificationServiceImpl extends Thread implements
 
 		String replyUrl = "http://" + ControlVars.SERVER_HOST
 				+ "/discussiondetailpage/" + question.getId();
-		for (User user : users) {
+		for (User userToNotify : usersToNotify) {
 			Criteria criteria = session.createCriteria(Notification.class);
-			criteria.add(Restrictions.eq("user", user));
+			criteria.add(Restrictions.eq("user", userToNotify));
 			criteria.add(Restrictions.eq("entity", question));
 			Notification notification = (Notification) criteria.uniqueResult();
 			if (notification == null) {
-				notification = createNewNotification(user, question, false);
+				notification = createNewNotification(userToNotify, question, false);
 			}
 
 			String muteUrl = "http://" + ControlVars.SERVER_HOST + "/mute/"
@@ -151,11 +108,11 @@ public class NotificationServiceImpl extends Thread implements
 			}
 
 			message += String.format(
-					ControlVars.QUESTION_NOTIFICATION_TEMPLATE, user.getName(),
-					question.getBody());
+					ControlVars.QUESTION_NOTIFICATION_TEMPLATE, question
+							.getOwner().getName(), question.getBody());
 			message += String.format(ControlVars.NOTIFICATION_FOOTER, muteUrl,
 					replyUrl);
-			sendEmail(message, subject, user);
+			sendEmail(message, subject, userToNotify);
 		}
 
 	}
@@ -215,7 +172,7 @@ public class NotificationServiceImpl extends Thread implements
 
 	@Override
 	public void unMute(User user, TmuEntity entity) {
-		// TODO Auto-generated method stub
+		// TODO Implement unMute
 		throw new UnsupportedOperationException();
 	}
 
@@ -233,7 +190,82 @@ public class NotificationServiceImpl extends Thread implements
 
 	@Override
 	public void unMute(User user, String hash) {
-		// TODO Auto-generated method stub
+		// TODO Implement unMute
 		throw new UnsupportedOperationException();
+	}
+
+	private class NotifierThread extends Thread {
+
+		private boolean run = true;
+		private Date lastChecked = new Date();
+
+		public void run() {
+			this.setPriority(MIN_PRIORITY);
+
+			while (run) {
+				Set<Question> toBeNotified = new HashSet<Question>();
+
+				/* Get new questions */
+				Criteria criteria = session.createCriteria(Question.class);
+				criteria.add(Restrictions.gt("created", lastChecked));
+				toBeNotified.addAll(criteria.list());
+
+				/* Get new Comments */
+				criteria = session.createCriteria(Comment.class);
+				criteria.add(Restrictions.gt("created", lastChecked));
+
+				/* Extract the origianl question from the comments */
+				for (Comment comment : (List<Comment>) criteria.list()) {
+					toBeNotified.add((Question) session.load(Question.class,
+							comment.getCommentOn().getId()));
+				}
+
+				/* Send notifications */
+				for (Question question : toBeNotified) {
+					List<User> usersToBeNotified = getUsers(question);
+					sendNotifications(question, usersToBeNotified);
+				}
+
+				lastChecked = new Date();
+
+				try {
+					Thread.sleep(WAIT_INTERVAL);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+		/**
+		 * @return the run
+		 */
+		public boolean isRun() {
+			return run;
+		}
+
+		/**
+		 * @param run
+		 *            the run to set
+		 */
+		public void setRun(boolean run) {
+			this.run = run;
+		}
+
+		/**
+		 * @return the lastChecked
+		 */
+		public Date getLastChecked() {
+			return lastChecked;
+		}
+
+		/**
+		 * @param lastChecked
+		 *            the lastChecked to set
+		 */
+		public void setLastChecked(Date lastChecked) {
+			this.lastChecked = lastChecked;
+		}
+
 	}
 }
