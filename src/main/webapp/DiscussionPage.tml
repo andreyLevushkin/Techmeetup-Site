@@ -2,13 +2,14 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 
 <head>
-<meta http-equiv="pragma" content="no-cache" />
-<META HTTP-EQUIV="Expires" CONTENT="-1" />
+<meta http-equiv="expires" content="-1"></meta>
+<meta http-equiv="Cache-Control" CONTENT="no-cache"></meta>
+<meta http-equiv="Pragma" CONTENT="no-cache"></meta>
 <title>Techmeetup - Discussion</title>
 <link rel="Stylesheet" type="text/css" href="full.css" media="all" />
 </head>
 
-<body t:type="layout" t:page="literal:discussion">
+<body t:type="layout" t:page="literal:discussion" onUnload="refreshHack()">
 
 <t:zone id="fullPageZone">
 	<!--main content goes here-->
@@ -53,6 +54,8 @@
 <t:block>
 	<t:ExternalUserProfile />
 </t:block>
+
+
 
 </body>
 
