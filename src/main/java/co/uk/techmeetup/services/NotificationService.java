@@ -1,5 +1,6 @@
 package co.uk.techmeetup.services;
 
+import co.uk.techmeetup.data.Notification;
 import co.uk.techmeetup.data.TmuEntity;
 import co.uk.techmeetup.data.User;
 
@@ -17,6 +18,6 @@ public interface NotificationService {
 
 	public boolean isMuted(User user, TmuEntity entity);
 
-	public void mute(String hash);
+	public Notification  mute(String hash);
 
 }

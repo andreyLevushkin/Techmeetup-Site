@@ -7,7 +7,7 @@
 <h1>${article.title}</h1>
 <p class="blog_info">Posted by <t:UserName user="article.owner" />
 on ${article.niceCreated}.</p>
-<div id="blog_content">${article.body}</div>
+<div id="blog_content"><img src="${article.mainImage.url}" class="blog_main_image"/>${article.body}</div>
 
 
 
@@ -33,7 +33,7 @@ on ${article.niceCreated}.</p>
 	<div id="comment_form">
 <t:if test="loggedIn">
 
-	<form method="post" action="#" t:type="Form" t:id="newCommentForm">
+	<form method="post" action="#" t:type="Form" t:id="newCommentForm" t:autofocus="false">
 	<p><label>Post Comment<br />
 	<textarea rows="5" cols="30" t:type="TextArea" t:value="newComment"
 		t:validate="required"></textarea> <input type="submit" name="submit"

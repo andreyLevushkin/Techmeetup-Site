@@ -177,7 +177,7 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public void mute(String hash) {
+	public Notification mute(String hash) {
 		Criteria criteria = session.createCriteria(Notification.class);
 		criteria.add(Restrictions.eq("hash", hash));
 		Notification notification = (Notification) criteria.uniqueResult();
@@ -186,6 +186,7 @@ public class NotificationServiceImpl implements NotificationService {
 			notification.setBlock(true);
 			tx.commit();
 		}
+		return notification;
 	}
 
 	@Override

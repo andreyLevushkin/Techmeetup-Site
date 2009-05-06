@@ -32,9 +32,9 @@
       </textarea></p>
 	<p><label for="mainImage">Main image:</label> <input type="file"
 		name="mainImage" t:type="Upload" t:id="mainImage" value="mainImage"
-		t:validate="required" /></p>
-	<p><label>Additional Images:</label> <input type="file"
-		name="image1" /></p>
+		/></p>
+	<!-- <p><label>Additional Images:</label> <input type="file"
+		name="image1" /></p>-->
 	<p><input type="submit" value="Post" /></p>
 	</form>
 

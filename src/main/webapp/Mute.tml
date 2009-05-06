@@ -2,7 +2,20 @@
 <head>
 <title></title>
 </head>
-<BODY>
+<BODY t:type="Layout">
+<div id="main_column"><t:if test="muted">
+	<h1>Hi ${username}. The following conversation has been musted:</h1>
+	<h2>${title}</h2>
+<t:if test="hasReferer">
+<a href="referer">Go back</a>
+</t:if>
+
+</t:if>
+
+<t:if test="muted" negate="true">
+	<h1>Balls ... there was some sort of an error so you are doomed to
+	recieve these notifications for ever.</h1>
+</t:if></div>
 </BODY>
-  
+
 </html>
