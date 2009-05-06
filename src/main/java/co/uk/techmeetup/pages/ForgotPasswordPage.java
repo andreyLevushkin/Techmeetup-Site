@@ -18,7 +18,7 @@ import co.uk.techmeetup.services.PasswordService;
 public class ForgotPasswordPage extends BasePage {
 
 	public static final String SUBJECT_TEMPLATE = "Password reset - TechMeetup";
-	public static final String BODY_TEMPLATE = "You new password is: %s \n\n"
+	public static final String BODY_TEMPLATE = "Hi %s. You new password is: %s \n\n"
 			+ "Please remember to change your password in Settings when you log back in.\n\n"
 			+ "Thanks!";
 	@Property
@@ -46,8 +46,8 @@ public class ForgotPasswordPage extends BasePage {
 				transaction.commit();
 			}
 
-			passwordReset = sendEmail(String.format(BODY_TEMPLATE, newPass),
-					SUBJECT_TEMPLATE, user);
+			passwordReset = sendEmail(String.format(BODY_TEMPLATE, user
+					.getName(), newPass), SUBJECT_TEMPLATE, user);
 
 		} else {
 			resetPasswordForm
