@@ -1728,7 +1728,7 @@ div#main_column div#blog_content {
 }
 
 div#main_column img.blog_main_image {
-	float: left;
+	/*float: left;*/
 	margin-bottom: 10px;
 	margin-left: 10px;
 	margin-right: 15px;
