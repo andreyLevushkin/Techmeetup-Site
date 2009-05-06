@@ -8,7 +8,7 @@
 		<p class="comment_count">${commentCount}</p>
 		<p class="post_info">Posted by <t:UserName user="blogPost.owner"/>
 		on ${blogPost.created}</p>
-		<a href="#" t:type="PageLink" t:page="ArticleDetailsPage" t:context="blogPost.id"><img src="${blogPost.mainImage.url}" alt="" /></a>
+		<a href="#" t:type="PageLink" t:page="ArticleDetailsPage" t:context="blogPost.id"><t:if test="blogPost.hasMainImage"><img src="${blogPost.mainImage.url}" alt="" /></t:if></a>
 		<p class="post_body">${blogPost.bodyNice}</p>
 		<a href="FullPost.html" class="read_more" t:type="PageLink" t:page="ArticleDetailsPage" t:context="blogPost.id">READ MORE</a>
 	</t:if>

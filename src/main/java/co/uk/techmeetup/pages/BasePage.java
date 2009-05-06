@@ -25,8 +25,10 @@ import co.uk.techmeetup.data.TagInstance;
 import co.uk.techmeetup.data.TmuEntity;
 import co.uk.techmeetup.data.User;
 import co.uk.techmeetup.misc.ControlVars;
+import co.uk.techmeetup.misc.LineBreakFormat;
 import co.uk.techmeetup.misc.UserSession;
 import co.uk.techmeetup.services.ContentService;
+import co.uk.techmeetup.services.InputSanitizer;
 import co.uk.techmeetup.services.TagService;
 
 public abstract class BasePage {
@@ -39,7 +41,10 @@ public abstract class BasePage {
 
 	@Inject
 	private TagService tagService;
-	
+
+	@Inject
+	private InputSanitizer inputSanitizer;
+
 	@ApplicationState
 	private UserSession userSession;
 
@@ -100,8 +105,8 @@ public abstract class BasePage {
 	public Set<Tag> findOrCreateTags(String tagNames) {
 		return tagService.findOrCreateTags(tagNames);
 	}
-	
-	public TagService getTagService(){
+
+	public TagService getTagService() {
 		return tagService;
 	}
 
@@ -117,19 +122,27 @@ public abstract class BasePage {
 		}
 		return defaultProfileImage;
 	}
-	
-	public Format getStringFormat(){
-		return  new StringFormat();
+
+	public Format getStringFormat() {
+		return new StringFormat();
 	}
-	
-	class StringFormat extends Format{
+
+	public LineBreakFormat getLineBreakFormat() {
+		return new LineBreakFormat();
+	}
+
+	public InputSanitizer getInputSanitizer() {
+		return inputSanitizer;
+	}
+
+	class StringFormat extends Format {
 
 		private static final long serialVersionUID = 1L;
 
 		@Override
 		public StringBuffer format(Object arg0, StringBuffer appendTo,
 				FieldPosition position) {
-			String in=(String) arg0;
+			String in = (String) arg0;
 			appendTo.append(in);
 			return appendTo;
 		}
@@ -138,6 +151,6 @@ public abstract class BasePage {
 		public Object parseObject(String arg0, ParsePosition arg1) {
 			return null;
 		}
-		
+
 	}
 }

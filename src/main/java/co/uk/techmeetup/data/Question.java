@@ -25,9 +25,9 @@ public class Question extends TmuEntity {
 
 	public String getBodyShort() {
 		if (body.length() > 70) {
-			return body.replace("<br/>", "").substring(0, 70);
+			return body.substring(0, 70);
 		}else{
-			return body.replace("<br/>", "");
+			return body;
 		}
 	}
 

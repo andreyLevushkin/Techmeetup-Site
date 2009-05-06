@@ -62,7 +62,7 @@ public class DiscussionPage extends SearchablePage {
 			// TODO deal with not logged in users
 			return;
 		}
-		body=inputSanitizer.sanitizeWithBreaks(body);
+		//body=inputSanitizer.sanitizeWithBreaks(body);
 		Session session = getSession();
 		session.beginTransaction();
 		Set<Tag> tagSet = findOrCreateTags(tags);

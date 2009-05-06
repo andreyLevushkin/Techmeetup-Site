@@ -38,7 +38,7 @@ public class DiscussionDetailPage extends BasePage {
 	@OnEvent(value = "submit", component = "newCommentForm")
 	public void postComment() {
 		if (isLoggedIn()) {
-			newCommentBody = inputSanitizer.sanitizeWithBreaks(newCommentBody);
+			//newCommentBody = inputSanitizer.sanitizeWithBreaks(newCommentBody);
 			Comment newComment = new Comment();
 			newComment.setOwner(getLoggedInUser());
 			newComment.setMeetup(question.getMeetup());

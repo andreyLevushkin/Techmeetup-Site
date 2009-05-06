@@ -10,7 +10,7 @@
 	<div id="discussion_topic">
 	<h1>${question.title}</h1>
 	<img src="${question.owner.profileImage.url}" alt="" />
-	<p><t:OutputRaw value="prop:question.body"></t:OutputRaw></p>
+	<p><t:TextOutput value="prop:question.body"></t:TextOutput></p>
 	<p class="discussion_info">Asked by <t:UserName
 		user="question.owner" /> on ${question.niceCreated} | ${commentCount}</p>
 	<p class="tags">Tags:<t:Loop source="question.tags" value="tag"> ${tag.tag.tagString} </t:Loop></p>
@@ -24,7 +24,7 @@
 			t:value="comment" t:index="commentIndex">
 		<div class="body"><img src="${comment.owner.profileImage.url}"
 			alt="picture of comment.owner.name" />
-		<p><t:OutputRaw value="prop:comment.body"></t:OutputRaw></p>
+		<p><t:TextOutput value="prop:comment.body"></t:TextOutput></p>
 		
 		</div>
 		<div class="comment_info">

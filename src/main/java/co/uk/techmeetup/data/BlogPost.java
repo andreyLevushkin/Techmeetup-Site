@@ -42,8 +42,8 @@ public class BlogPost extends TmuEntity {
 
 	public String getBodyNice() {
 		if (body.length() > MAX_BODY_NICE_LENGTH) {
-			return body.substring(0, MAX_BODY_NICE_LENGTH)+" ...";
-		}else{
+			return body.substring(0, MAX_BODY_NICE_LENGTH) + " ...";
+		} else {
 			return body;
 		}
 	}
@@ -60,4 +60,7 @@ public class BlogPost extends TmuEntity {
 		this.mainImage = mainImage;
 	}
 
+	public boolean getHasMainImage() {
+		return this.mainImage != null;
+	}
 }

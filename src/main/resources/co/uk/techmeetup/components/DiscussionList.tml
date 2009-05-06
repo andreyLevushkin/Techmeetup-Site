@@ -18,7 +18,7 @@
 		t:index="loopIndex" class="${questionClass}">
 	<h3><a t:type="PageLink" t:page="DiscussionDetailPage"
 		t:context="prop:thisQuestion.id">${thisQuestion.title}</a></h3>
-	<p class="excerpt" ><t:OutputRaw t:value="thisQuestion.bodyShort"/></p>
+	<p class="excerpt" ><t:TextOutput t:value="thisQuestion.bodyShort"/></p>
 	<p>Asked by <t:UserName user="prop:thisQuestion.owner" />
 	${thisQuestion.niceCreated} <span class="separator">|</span>
 	${commentCount} <span class="separator">|</span> Tags: <a href="#"
