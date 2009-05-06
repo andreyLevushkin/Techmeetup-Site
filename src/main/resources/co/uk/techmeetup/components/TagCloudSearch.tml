@@ -4,7 +4,7 @@
 	<h2>Search</h2>
 	<div id="search_and_browse">
 	<form action="#" t:type="Form" t:id="tagSearchForm"
-		t:zone="fullPageZone"><input t:type="TextField"
+		t:zone="fullPageZone" t:autofocus="false"><input t:type="TextField"
 		t:value="searchStringValue" t:id="searchString" type="text" />
 		<a href="#" class="clear_tags">clear</a></form>
 	<t:zone id="tagCloudZone">

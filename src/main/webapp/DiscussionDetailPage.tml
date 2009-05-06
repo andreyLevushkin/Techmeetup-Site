@@ -37,7 +37,7 @@
 	</div>
 
 	<div id="comment_form"><t:if test="loggedIn">
-		<form method="post" action="#" t:type="Form" t:id="newCommentForm">
+		<form method="post" action="#" t:type="Form" t:id="newCommentForm" t:autofocus="false">
 		<p><label for="post_comment">Post Comment</label><br />
 		<textarea name="post_comment" rows="5" cols="30" t:type="TextArea"
 			t:value="newCommentBody" t:validate="required" t:id="newCommentField"></textarea>

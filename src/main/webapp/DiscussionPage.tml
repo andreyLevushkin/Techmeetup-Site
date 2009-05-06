@@ -18,7 +18,7 @@
 	<div id="ask_question">
 	<h1>Ask a question</h1>
 	<t:if test="loggedIn">
-		<form action="#" t:type="Form" t:id="postQuestion">
+		<form action="#" t:type="Form" t:id="postQuestion" t:autofocus="false">
 		<div id="form_body">
 		<p><label for="title">Question</label> <input type="text"
 			name="title" t:type="TextField" t:value="title" t:validate="required"
