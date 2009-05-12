@@ -56,22 +56,21 @@ public class ControlVars {
 			+ "<title>Techmeetup</title>\n"
 			+ "</head>\n"
 			+ "<body>\n<div>\n"
-			+ "<a href=\"%s\">Mute</a> any further notifications on this topic<br/>"
-			+ "<a href=\"%s\">Reply</a> to this message<br/><br/><br/>";
+			+ "Don't want to receive every reply on this topic? <a href=\"%s\">Mute!</a>"
+			+ "See this discussion and reply with the link below:"
+			+ "<a href=\"%s\" >%s</a>\n";
 
 	/**
 	 * The order of substitution is name,body
 	 */
-	public static final String QUESTION_NOTIFICATION_TEMPLATE = "<p><br/>%s posted:<br/>"
-			+ "%s\n\n\n\n<br/></p>";
+	public static final String QUESTION_NOTIFICATION_TEMPLATE = "<p>%s posted:"
+			+ "%s<br/></p>\n";
 
 	/**
 	 * The order of substitution is mute_link,reply_link
 	 */
-	public static final String NOTIFICATION_FOOTER = "-----------------------------------------------------------\n"
-			+ "<p><a href=\"%s\">Mute</a> any further notifications on this topic<br/>"
-			+ "<a href=\"%s\">Reply</a> to this message<br/>"
-			+ "You received this message because you care about tech (and your notifications are enabled at <a href=\"http://www.techmeetup.co.uk\">www.TechMeetup.co.uk</a>).<br/>"
-			+ "If you don&rsquo;t want these timely notifications of what&rsquo;s happening around you, click here to remove your account from the service, or here to remain on the service but disable notifications<br/>"
-			+ "</p></div>\n</body>\n</html>";
+	public static final String NOTIFICATION_FOOTER = "\n-- Reply to this message Mute any further notifications on this topic "
+			+ "You received this message because you care about tech (and your notifications are enabled at <a href=\"http://www.techmeetup.co.uk\">www.techmeetup.co.uk</a>). "
+			+ "If you don’t want these timely notifications of what’s happening around you, click here to remove your account from "
+			+ "the service, or here to remain on the service but disable notifications</body></html>";
 }

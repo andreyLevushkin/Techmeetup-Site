@@ -31,18 +31,20 @@ import co.uk.techmeetup.misc.DescendingDateComparator;
 @EagerLoad
 public class NotificationServiceImpl implements NotificationService {
 
-	public static final long WAIT_INTERVAL = 1000 * 30;
+	public static final long WAIT_INTERVAL = 1000 * 5;
 	public static final int SUBJECT_LENGTH = 60;
 
 	private boolean run = true;
 	private Session session;
 	private NotifierThread notifier;
+	private static volatile short count = 0;
 
 	public NotificationServiceImpl(Session session) {
 		this.session = session;
 		if (run) {
 			notifier = new NotifierThread();
 			notifier.start();
+
 		}
 	}
 
@@ -89,7 +91,8 @@ public class NotificationServiceImpl implements NotificationService {
 			criteria.add(Restrictions.eq("entity", question));
 			Notification notification = (Notification) criteria.uniqueResult();
 			if (notification == null) {
-				notification = createNewNotification(userToNotify, question, false);
+				notification = createNewNotification(userToNotify, question,
+						false);
 			}
 
 			String muteUrl = "http://" + ControlVars.SERVER_HOST + "/mute/"
@@ -97,14 +100,16 @@ public class NotificationServiceImpl implements NotificationService {
 
 			SortedSet<Comment> comments = new TreeSet<Comment>(
 					new DescendingDateComparator());
+			session.refresh(question);
 			comments.addAll(question.getComments());
 
 			String message = String.format(ControlVars.NOTIFICATION_HEADER,
-					muteUrl, replyUrl);
+					muteUrl, replyUrl, replyUrl);
 			for (Comment comment : comments) {
-				message += String.format(
+				String messageFragment = String.format(
 						ControlVars.QUESTION_NOTIFICATION_TEMPLATE, comment
 								.getOwner().getName(), comment.getBody());
+				message = message.concat(messageFragment);
 			}
 
 			message += String.format(
@@ -118,7 +123,9 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	private boolean sendEmail(String message, String subject, User user) {
-		System.out.print(message);
+		System.out.print("-------------NOTIFICATION-----------------\n"
+				+ user.getName() + " :" + subject + "\n" + message
+				+ "\n------------------------END----------------------\n");
 		try {
 			HtmlEmail email = new HtmlEmail();
 			email.setHostName(ControlVars.SMTP_HOST);
@@ -149,8 +156,11 @@ public class NotificationServiceImpl implements NotificationService {
 		criteria.add(Restrictions.eq("user", user));
 		criteria.add(Restrictions.eq("entity", entity));
 		Notification notification = (Notification) criteria.uniqueResult();
+
 		if (notification == null) {
 			notification = createNewNotification(user, entity, false);
+		} else {
+			session.refresh(notification);
 		}
 		return notification.isBlock();
 	}
@@ -202,9 +212,10 @@ public class NotificationServiceImpl implements NotificationService {
 
 		public void run() {
 			this.setPriority(MIN_PRIORITY);
-
+			count++;
 			while (run) {
 				Set<Question> toBeNotified = new HashSet<Question>();
+				System.out.print("Checking for new stuff since " + lastChecked);
 
 				/* Get new questions */
 				Criteria criteria = session.createCriteria(Question.class);
@@ -221,13 +232,15 @@ public class NotificationServiceImpl implements NotificationService {
 							comment.getCommentOn().getId()));
 				}
 
+				lastChecked = new Date();
+
 				/* Send notifications */
 				for (Question question : toBeNotified) {
+					System.out.println("Notifying " + question.getId() + " "
+							+ question.getTitle());
 					List<User> usersToBeNotified = getUsers(question);
 					sendNotifications(question, usersToBeNotified);
 				}
-
-				lastChecked = new Date();
 
 				try {
 					Thread.sleep(WAIT_INTERVAL);

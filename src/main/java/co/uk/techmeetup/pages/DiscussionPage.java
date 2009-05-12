@@ -12,6 +12,7 @@ import org.apache.tapestry5.annotations.Mixins;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Criteria;
@@ -29,7 +30,7 @@ import co.uk.techmeetup.misc.SearchResult;
 import co.uk.techmeetup.services.InputSanitizer;
 import co.uk.techmeetup.services.TagService;
 
-@IncludeJavaScriptLibrary("context:js/validation_fix.js") 
+@IncludeJavaScriptLibrary("context:js/validation_fix.js")
 public class DiscussionPage extends SearchablePage {
 
 	@Property
@@ -53,16 +54,18 @@ public class DiscussionPage extends SearchablePage {
 
 	@Inject
 	private InputSanitizer inputSanitizer;
-	
+
 	private String thisSearchString;
+
+	@InjectComponent
+	private Form postQuestion;
 
 	@OnEvent(value = "submit", component = "postQuestion")
 	public void postQuestion() {
-		if (!this.isLoggedIn()) {
-			// TODO deal with not logged in users
+		if (!this.isLoggedIn() || postQuestion.getHasErrors()) {
 			return;
 		}
-		//body=inputSanitizer.sanitizeWithBreaks(body);
+		// body=inputSanitizer.sanitizeWithBreaks(body);
 		Session session = getSession();
 		session.beginTransaction();
 		Set<Tag> tagSet = findOrCreateTags(tags);

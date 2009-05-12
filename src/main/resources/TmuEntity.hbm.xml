@@ -96,8 +96,8 @@
 		<joined-subclass name="co.uk.techmeetup.data.Question"
 			table="Questions" lazy="false">
 			<key column="entity_id" />
-			<property name="title" />
-			<property name="body" type="text"/>
+			<property name="title" not-null="true"/>
+			<property name="body" type="text" not-null="true"/>
 		</joined-subclass>
 
 	</class>
